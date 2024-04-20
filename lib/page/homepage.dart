@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+
+import 'package:p20240420/page/dashboard.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -116,7 +117,27 @@ class _MyHomePageState extends State<MyHomePage> {
                 minimumSize:
                     MaterialStateProperty.all<Size>(Size(100, 50)), // 设置宽度和高度
               ),
-              onPressed: () {},
+              onPressed: () {
+                String username = usernameController.text;
+                String password = passwordController.text;
+
+                // 检查输入
+                if (username.isEmpty) {
+                  print('请输入用户名');
+                  return;
+                }
+                if (password.isEmpty) {
+                  print('请输入密码');
+                  return;
+                }
+
+                // 如果输入有效，导航到 dashboard 页面
+                Navigator.pushReplacementNamed(
+                  context,
+                  '/dashboard',
+                  arguments: {'title': '首页'},
+                );
+              },
               child: const Text('登陆',
                   style: TextStyle(fontWeight: FontWeight.w800)),
             )

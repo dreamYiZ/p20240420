@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p20240420/page/homepage.dart';
+import 'package:p20240420/page/dashboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,8 +34,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Hi Flutter!'),
+      routes: {
+        '/dashboard': (context) => DashboardPage(title: '首页'),
+        // ... 其他路由 ...
+      },
     );
   }
 }
-
-
