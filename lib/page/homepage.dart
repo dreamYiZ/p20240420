@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/painting.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -20,18 +20,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.orange[200],
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
@@ -55,32 +45,37 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
+              padding: const EdgeInsets.only(top: 60.0),
+              child: Center(
+                  child: Container(
+                      width: 200,
+                      height: 150,
+                      /*decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(50.0)),*/
+                      child: const Image(
+                          image: AssetImage('assets/images/bamboo.png')))),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+            ),
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextFormField(
+                controller: usernameController,
+                enableSuggestions: false,
+                autocorrect: false,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'username',
+                  labelText: '用户名',
                 ),
-                // The validator receives the text that the user has entered.
+                // The validator receives the text that the user has entered.goo
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
+                    return '请输入用户名';
                   }
                   return null;
                 },
@@ -92,19 +87,39 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextFormField(
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                controller: passwordController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Password',
+                  labelText: '密码',
                 ),
                 // The validator receives the text that the user has entered.
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
+                    return '请输入密码';
                   }
                   return null;
                 },
               ),
             ),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+            ),
+            TextButton(
+              style: ButtonStyle(
+                foregroundColor:
+                    MaterialStateProperty.all<Color>(Colors.black87),
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Colors.grey.shade200), // 设置背景色
+                minimumSize:
+                    MaterialStateProperty.all<Size>(Size(100, 50)), // 设置宽度和高度
+              ),
+              onPressed: () {},
+              child: const Text('登陆',
+                  style: TextStyle(fontWeight: FontWeight.w800)),
+            )
           ],
         ),
       ),
